@@ -26,12 +26,12 @@ Many thanks to https://grafana.com/grafana/dashboards/6483 and https://grafana.c
 
 ## Screenshots
 
-| Dashboard     | Screenshot                                                                                                                                                                       |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Cluster Stats | <img src="https://raw.githubusercontent.com/huynhsamha/grafana-dashboards-elasticsearch/master/screenshots/es-cluster-dashboard.jpg" alt="ES Cluster Stats" width="500px">       |
-| Node Stats    | <img src="https://raw.githubusercontent.com/huynhsamha/grafana-dashboards-elasticsearch/master/screenshots/es-node-stats-dashboard.jpg" alt="ES Node Stats" width="500px">       |
-| Index Stats   | <img src="https://raw.githubusercontent.com/huynhsamha/grafana-dashboards-elasticsearch/master/screenshots/es-index-stats-dashboard.jpg" alt="ES Index Stats" width="500px">     |
-| History Stats | <img src="https://raw.githubusercontent.com/huynhsamha/grafana-dashboards-elasticsearch/master/screenshots/es-history-stats-dashboard.jpg" alt="ES History Stats" width="500px"> |
+| Dashboard         |                                                                                    Screenshot                                                                                    |
+| ----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| **Cluster Stats** |    <img src="https://raw.githubusercontent.com/huynhsamha/grafana-dashboards-elasticsearch/master/screenshots/es-cluster-dashboard.jpg" alt="ES Cluster Stats" width="400px">    |
+| **Node Stats**    |    <img src="https://raw.githubusercontent.com/huynhsamha/grafana-dashboards-elasticsearch/master/screenshots/es-node-stats-dashboard.jpg" alt="ES Node Stats" width="400px">    |
+| **Index Stats**   |   <img src="https://raw.githubusercontent.com/huynhsamha/grafana-dashboards-elasticsearch/master/screenshots/es-index-stats-dashboard.jpg" alt="ES Index Stats" width="400px">   |
+| **History Stats** | <img src="https://raw.githubusercontent.com/huynhsamha/grafana-dashboards-elasticsearch/master/screenshots/es-history-stats-dashboard.jpg" alt="ES History Stats" width="400px"> |
 
 ## Changelogs
 
