@@ -1,51 +1,12 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "3.1"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -54,26 +15,29 @@
       }
     ]
   },
-  "description": "",
+  "description": "Grafana Dashboards for Elasticsearch using Prometheus Datasource. Dashboard for History Stats.",
   "editable": true,
-  "gnetId": 6483,
+  "fiscalYearStartMonth": 0,
+  "gnetId": 13074,
   "graphTooltip": 1,
-  "id": 79,
-  "iteration": 1601026115630,
+  "id": 505,
   "links": [
     {
       "asDropdown": true,
       "icon": "external link",
-      "tags": [
-        "elasticsearch"
-      ],
+      "tags": ["elasticsearch"],
       "title": "ES Dashboards",
       "type": "dashboards"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PAE45454D0EDB9216"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -82,18 +46,126 @@
       },
       "id": 231,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PAE45454D0EDB9216"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Cluster Level - $cluster",
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "description": "",
-      "fill": 0,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "ReqRate",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ProcRate - Today"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 100
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgb(19, 81, 164)",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "ProcRate"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Today"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#FFEE52",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 7,
         "w": 24,
@@ -101,50 +173,26 @@
         "y": 1
       },
       "id": 213,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "ProcRate - Today",
-          "bars": true,
-          "color": "rgb(19, 81, 164)",
-          "legend": false,
-          "lines": false,
-          "yaxis": 2,
-          "zindex": -3
+        "legend": {
+          "calcs": ["mean", "max", "min"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
         },
-        {
-          "alias": "Today",
-          "color": "#FFEE52"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
         }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      },
+      "pluginVersion": "10.0.0",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "sum (rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval]))",
           "format": "time_series",
           "intervalFactor": 1,
@@ -152,68 +200,136 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "1 / (\nsum (rate(elasticsearch_indices_indexing_index_time_seconds_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval])) / \nsum (rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval]))\n)",
           "hide": false,
           "legendFormat": "ProcRate - Today",
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "label_replace(sum (rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval] offset $day)), \"time\", \"$day\", \"\", \".*\") or\nlabel_replace(sum (rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval] offset $day1)), \"time\", \"$day1\", \"\", \".*\") or\nlabel_replace(sum (rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval] offset $day2)), \"time\", \"$day2\", \"\", \".*\")",
           "legendFormat": "Last {{ time }}",
           "refId": "C"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Cluster Indexing - $cluster",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "reqps",
-          "label": "ReqRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "reqps",
-          "label": "ProcRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "description": "",
-      "fill": 0,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "ReqRate",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ProcRate - Today"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 100
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgb(17, 79, 185)",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "ProcRate"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Today"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#FFEE52",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 7,
         "w": 24,
@@ -221,52 +337,27 @@
         "y": 8
       },
       "id": 234,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "maxPerRow": 3,
-      "nullPointMode": "null",
       "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "seriesOverrides": [
-        {
-          "alias": "ProcRate - Today",
-          "bars": true,
-          "color": "rgb(17, 79, 185)",
-          "legend": false,
-          "lines": false,
-          "yaxis": 2,
-          "zindex": -3
+        "legend": {
+          "calcs": ["mean", "max", "min"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
         },
-        {
-          "alias": "Today",
-          "color": "#FFEE52"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
         }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      },
+      "pluginVersion": "10.0.0",
+      "repeatDirection": "h",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "sum (rate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval]))",
           "format": "time_series",
           "intervalFactor": 1,
@@ -274,60 +365,33 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "1 / (\n(sum(rate(elasticsearch_indices_search_query_time_seconds{instance=~\"$instance\",cluster=\"$cluster\"}[$interval]))\n+ sum(rate(elasticsearch_indices_search_fetch_time_seconds{instance=~\"$instance\",cluster=\"$cluster\"}[$interval]))\n+ sum(rate(elasticsearch_indices_search_scroll_time_seconds{instance=~\"$instance\",cluster=\"$cluster\"}[$interval]))\n+ sum(rate(elasticsearch_indices_search_suggest_time_seconds{instance=~\"$instance\",cluster=\"$cluster\"}[$interval]))\n) /\nsum(rate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval]))\n)",
           "legendFormat": "ProcRate - Today",
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "label_replace(sum (rate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval] offset $day)), \"time\", \"$day\", \"\", \".*\") or\nlabel_replace(sum (rate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval] offset $day1)), \"time\", \"$day1\", \"\", \".*\") or\nlabel_replace(sum (rate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\"}[$interval] offset $day2)), \"time\", \"$day2\", \"\", \".*\")",
           "legendFormat": "Last {{ time }}",
           "refId": "C"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Cluster Search Query - $cluster",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "reqps",
-          "label": "ReqRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "reqps",
-          "label": "ProcRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PAE45454D0EDB9216"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -336,19 +400,126 @@
       },
       "id": 236,
       "panels": [],
-      "repeat": null,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PAE45454D0EDB9216"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Node Level - $name",
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "description": "",
-      "fill": 0,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "ReqRate",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ProcRate - Today"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 100
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgb(19, 81, 164)",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "ProcRate"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Today"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#FFEE52",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 7,
         "w": 24,
@@ -356,50 +527,26 @@
         "y": 16
       },
       "id": 242,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "ProcRate - Today",
-          "bars": true,
-          "color": "rgb(19, 81, 164)",
-          "legend": false,
-          "lines": false,
-          "yaxis": 2,
-          "zindex": -3
+        "legend": {
+          "calcs": ["mean", "max", "min"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
         },
-        {
-          "alias": "Today",
-          "color": "#FFEE52"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
         }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      },
+      "pluginVersion": "10.0.0",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval])",
           "format": "time_series",
           "intervalFactor": 1,
@@ -407,67 +554,135 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "1 / (\nrate(elasticsearch_indices_indexing_index_time_seconds_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval]) / rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval])\n)",
           "legendFormat": "ProcRate - Today",
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "label_replace(rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval] offset $day), \"time\", \"$day\", \"\", \".*\") or\nlabel_replace(rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval] offset $day1), \"time\", \"$day1\", \"\", \".*\") or\nlabel_replace(rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval] offset $day2), \"time\", \"$day2\", \"\", \".*\")",
           "legendFormat": "Last {{ time }}",
           "refId": "C"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Node Indexing - $name",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "reqps",
-          "label": "ReqRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "reqps",
-          "label": "ProcRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "description": "",
-      "fill": 0,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "ReqRate",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ProcRate - Today"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 100
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgb(17, 79, 185)",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "ProcRate"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Today"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#FFEE52",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 7,
         "w": 24,
@@ -475,52 +690,27 @@
         "y": 23
       },
       "id": 244,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "maxPerRow": 3,
-      "nullPointMode": "null",
       "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "seriesOverrides": [
-        {
-          "alias": "ProcRate - Today",
-          "bars": true,
-          "color": "rgb(17, 79, 185)",
-          "legend": false,
-          "lines": false,
-          "yaxis": 2,
-          "zindex": -3
+        "legend": {
+          "calcs": ["mean", "max", "min"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
         },
-        {
-          "alias": "Today",
-          "color": "#FFEE52"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
         }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      },
+      "pluginVersion": "10.0.0",
+      "repeatDirection": "h",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "rate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval])",
           "format": "time_series",
           "intervalFactor": 1,
@@ -528,60 +718,33 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "1 / (\n(rate(elasticsearch_indices_search_query_time_seconds{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval])\n+ rate(elasticsearch_indices_search_fetch_time_seconds{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval])\n+ rate(elasticsearch_indices_search_scroll_time_seconds{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval])\n+ rate(elasticsearch_indices_search_suggest_time_seconds{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval])\n) /\nrate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval])\n)",
           "legendFormat": "ProcRate - Today",
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "label_replace(rate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval] offset $day), \"time\", \"$day\", \"\", \".*\") or\nlabel_replace(rate(elasticsearch_indices_search_query_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval] offset $day1), \"time\", \"$day1\", \"\", \".*\") or\nlabel_replace(rate(elasticsearch_indices_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",name=~\"$name\"}[$interval] offset $day2), \"time\", \"$day2\", \"\", \".*\")",
           "legendFormat": "Last {{ time }}",
           "refId": "C"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Node Search Query - $name",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "reqps",
-          "label": "ReqRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "reqps",
-          "label": "ProcRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PAE45454D0EDB9216"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -590,18 +753,126 @@
       },
       "id": 241,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PAE45454D0EDB9216"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Index Level - $index",
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "description": "",
-      "fill": 0,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "ReqRate",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ProcRate - Today"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 100
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgb(19, 81, 164)",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "ProcRate"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Today"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#FFEE52",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 7,
         "w": 24,
@@ -609,50 +880,26 @@
         "y": 31
       },
       "id": 243,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "ProcRate - Today",
-          "bars": true,
-          "color": "rgb(19, 81, 164)",
-          "legend": false,
-          "lines": false,
-          "yaxis": 2,
-          "zindex": -3
+        "legend": {
+          "calcs": ["mean", "max", "min"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
         },
-        {
-          "alias": "Today",
-          "color": "#FFEE52"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
         }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      },
+      "pluginVersion": "10.0.0",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "rate(elasticsearch_index_stats_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval])",
           "format": "time_series",
           "intervalFactor": 1,
@@ -660,67 +907,135 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "1 / (\nrate(elasticsearch_index_stats_indexing_index_time_seconds_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval]) / rate(elasticsearch_index_stats_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval])\n)",
           "legendFormat": "ProcRate - Today",
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "label_replace(rate(elasticsearch_index_stats_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval] offset $day), \"time\", \"$day\", \"\", \".*\") or\nlabel_replace(rate(elasticsearch_index_stats_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval] offset $day1), \"time\", \"$day1\", \"\", \".*\") or\nlabel_replace(rate(elasticsearch_index_stats_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval] offset $day2), \"time\", \"$day2\", \"\", \".*\")",
           "legendFormat": "Last {{ time }}",
           "refId": "C"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Indexing - $index",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "reqps",
-          "label": "ReqRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "reqps",
-          "label": "ProcRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
       "description": "",
-      "fill": 0,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "ReqRate",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ProcRate - Today"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 100
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgb(17, 79, 185)",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "ProcRate"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Today"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#FFEE52",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 7,
         "w": 24,
@@ -728,52 +1043,27 @@
         "y": 38
       },
       "id": 245,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "maxPerRow": 3,
-      "nullPointMode": "null",
       "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "seriesOverrides": [
-        {
-          "alias": "ProcRate - Today",
-          "bars": true,
-          "color": "rgb(17, 79, 185)",
-          "legend": false,
-          "lines": false,
-          "yaxis": 2,
-          "zindex": -3
+        "legend": {
+          "calcs": ["mean", "max", "min"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
         },
-        {
-          "alias": "Today",
-          "color": "#FFEE52"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
         }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      },
+      "pluginVersion": "10.0.0",
+      "repeatDirection": "h",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "rate(elasticsearch_index_stats_search_query_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval])",
           "format": "time_series",
           "intervalFactor": 1,
@@ -781,75 +1071,61 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "1 / (\n(rate(elasticsearch_index_stats_search_query_time_seconds_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval])\n+ rate(elasticsearch_index_stats_search_fetch_time_seconds_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval])\n+ rate(elasticsearch_index_stats_search_scroll_time_seconds_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval])\n+ rate(elasticsearch_index_stats_search_suggest_time_seconds_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval])\n) / rate(elasticsearch_index_stats_search_query_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval])\n)",
           "legendFormat": "ProcRate - Today",
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "expr": "label_replace(rate(elasticsearch_index_stats_search_query_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval] offset $day), \"time\", \"$day\", \"\", \".*\") or\nlabel_replace(rate(elasticsearch_index_stats_search_query_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval] offset $day1), \"time\", \"$day1\", \"\", \".*\") or\nlabel_replace(rate(elasticsearch_index_stats_indexing_index_total{instance=~\"$instance\",cluster=\"$cluster\",index=~\"$index\"}[$interval] offset $day2), \"time\", \"$day2\", \"\", \".*\")",
           "legendFormat": "Last {{ time }}",
           "refId": "C"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
       "title": "Search Query - $index",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "reqps",
-          "label": "ReqRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "reqps",
-          "label": "ProcRate",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 20,
+  "schemaVersion": 38,
   "style": "dark",
-  "tags": [
-    "elasticsearch",
-    "es-cluster-hist"
-  ],
+  "tags": ["elasticsearch", "es-cluster-hist"],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
-          "text": "",
-          "value": ""
+          "selected": false,
+          "text": "Mimir",
+          "value": "Mimir"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "million-dollar-cluster",
+          "value": "million-dollar-cluster"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
         "definition": "",
         "hide": 0,
         "includeAll": false,
@@ -857,24 +1133,27 @@
         "multi": false,
         "name": "cluster",
         "options": [],
-        "query": "label_values(elasticsearch_indices_docs,cluster)",
+        "query": {
+          "query": "label_values(elasticsearch_indices_docs,cluster)",
+          "refId": "Prometheus-cluster-Variable-Query"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
-        "tagValuesQuery": null,
-        "tags": [],
-        "tagsQuery": null,
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {
-          "text": "localhost:9115",
-          "value": "localhost:9115"
+          "selected": false,
+          "text": "elasticsearch-exporter",
+          "value": "elasticsearch-exporter"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
         "definition": "",
         "hide": 2,
         "includeAll": false,
@@ -882,24 +1161,27 @@
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "label_values(elasticsearch_indices_docs{cluster=\"$cluster\", name!=\"\"},instance)",
+        "query": {
+          "query": "label_values(elasticsearch_indices_docs{cluster=\"$cluster\", name!=\"\"},instance)",
+          "refId": "Prometheus-instance-Variable-Query"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
-        "tagValuesQuery": null,
-        "tags": [],
-        "tagsQuery": null,
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {
-          "text": "",
-          "value": ""
+          "selected": false,
+          "text": "els23.prd.lim.wma.bds.systems",
+          "value": "els23.prd.lim.wma.bds.systems"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
         "definition": "label_values(elasticsearch_indices_docs{instance=\"$instance\",cluster=\"$cluster\", name!=\"\"},name)",
         "hide": 0,
         "includeAll": false,
@@ -907,24 +1189,27 @@
         "multi": false,
         "name": "name",
         "options": [],
-        "query": "label_values(elasticsearch_indices_docs{instance=\"$instance\",cluster=\"$cluster\", name!=\"\"},name)",
+        "query": {
+          "query": "label_values(elasticsearch_indices_docs{instance=\"$instance\",cluster=\"$cluster\", name!=\"\"},name)",
+          "refId": "Prometheus-name-Variable-Query"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 2,
-        "tagValuesQuery": null,
-        "tags": [],
-        "tagsQuery": null,
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {
-          "text": "",
-          "value": ""
+          "selected": false,
+          "text": "unsubscribe-2023.06",
+          "value": "unsubscribe-2023.06"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
         "definition": "label_values(elasticsearch_index_stats_get_total{instance=\"$instance\",cluster=\"$cluster\"},index)",
         "hide": 0,
         "includeAll": false,
@@ -932,13 +1217,15 @@
         "multi": false,
         "name": "index",
         "options": [],
-        "query": "label_values(elasticsearch_index_stats_get_total{instance=\"$instance\",cluster=\"$cluster\"},index)",
+        "query": {
+          "query": "label_values(elasticsearch_index_stats_get_total{instance=\"$instance\",cluster=\"$cluster\"},index)",
+          "refId": "Prometheus-index-Variable-Query"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 2,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -948,6 +1235,7 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
+          "selected": false,
           "text": "5m",
           "value": "5m"
         },
@@ -1017,7 +1305,6 @@
         "type": "interval"
       },
       {
-        "allValue": null,
         "current": {
           "tags": [],
           "text": "7d",
@@ -1185,7 +1472,6 @@
         "type": "custom"
       },
       {
-        "allValue": null,
         "current": {
           "tags": [],
           "text": "7d",
@@ -1353,7 +1639,6 @@
         "type": "custom"
       },
       {
-        "allValue": null,
         "current": {
           "tags": [],
           "text": "7d",
@@ -1540,20 +1825,11 @@
       "2h",
       "1d"
     ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
   "title": "Elasticsearch - History Stats",
   "uid": "7820e5c4d6ae456aa21390618b6515dd",
-  "version": 1
+  "version": 8,
+  "weekStart": ""
 }
